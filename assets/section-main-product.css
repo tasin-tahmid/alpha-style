@@ -2664,7 +2664,7 @@ main .shopify-section:first-child.not-margin .section--have-overlay:not(.article
 
 .free-shipping-banner{
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: center;
   gap: 8px;
   background: #DCF6EC;
