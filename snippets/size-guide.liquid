@@ -1,0 +1,36 @@
+<div class="c-size-guide">
+    <div class="c-size-guide__size-guide-opener">
+        Fits oversized – 
+        <button onclick="openModal()" class="c-size-guide__size-guide-opener-button">
+            check sizing guide
+        </button>
+    </div>
+
+    <div class="c-size-guide__modal" id="c-size-guide__modal">
+        <div class="c-size-guide__modal-content">
+            <button class="c-size-guide__close-icon" onclick="closeModal()">
+                {{- 'close_icon.svg' | inline_asset_content -}}
+            </button>
+            <h3 class="c-size-guide__modal-heading">Size Guide</h3>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal() {
+        document.getElementById('c-size-guide__modal').style.display = 'flex';
+        document.body.classList.add('no-scroll'); 
+    }
+
+    function closeModal() {
+        document.getElementById('c-size-guide__modal').style.display = 'none';
+        document.body.classList.remove('no-scroll'); 
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('c-size-guide__modal');
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+</script>

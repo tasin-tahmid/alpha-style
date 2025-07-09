@@ -1298,6 +1298,13 @@ main .shopify-section:first-child.not-margin .section--have-overlay:not(.article
   margin: 4rem 0;
   pointer-events: all;
 }
+.product-parameters {
+  margin: 4rem 0;
+  pointer-events: all;
+}
+.product-parameters.u-mb-12 {
+  margin-bottom: 12px;
+}
 .product-parameters variant-radios,
 .product-parameters .variant-selects {
   display: flex;

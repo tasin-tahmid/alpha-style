@@ -1,0 +1,69 @@
+
+.c-size-guide__size-guide-opener{
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 17px;
+    letter-spacing: normal;
+    vertical-align: middle;
+    color: #4D4D4D;
+}
+
+.c-size-guide__size-guide-opener-button{
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: normal;
+    vertical-align: middle;
+    text-decoration: underline;
+    color: #000000;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.c-size-guide__modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0000001A; /* 10% black overlay */
+    justify-content: center;
+    align-items: center;
+}
+
+.c-size-guide__modal-content {
+    background: #FFFFFF;
+    padding: 32px;
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+}
+
+.c-size-guide__modal-heading{
+    margin: 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18.2px;
+    letter-spacing: -0.28%;
+    color: #000000;
+;
+}
+
+.c-size-guide__close-icon {
+    position: absolute;
+    top: 12px;
+    right: 9px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
