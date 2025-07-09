@@ -2658,3 +2658,24 @@ main .shopify-section:first-child.not-margin .section--have-overlay:not(.article
     margin-top: calc(var(--header-height) + 6.4rem);
   }
 }
+
+.free-shipping-banner{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #DCF6EC;
+  padding: 9px;
+  margin-bottom: 8px;
+}
+.free-shipping-banner .free-shipping-icon{
+  display: flex;
+}
+.free-shipping-banner .free-shipping-text{
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #118B58;
+}
