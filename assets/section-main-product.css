@@ -875,6 +875,9 @@ main .shopify-section:first-child.not-margin .section--have-overlay:not(.article
 .product__buy_buttons {
   margin: 4rem 0;
 }
+.product__buy_buttons.u-mb-24 {
+  margin-bottom: 24px;
+}
 .product .pickup-availability {
   margin: 4rem 0;
 }
@@ -2665,17 +2668,63 @@ main .shopify-section:first-child.not-margin .section--have-overlay:not(.article
   justify-content: center;
   gap: 8px;
   background: #DCF6EC;
-  padding: 9px;
+  padding: 10px;
   margin-bottom: 8px;
 }
-.free-shipping-banner .free-shipping-icon{
+
+.free-shipping-banner .free-shipping-image{
   display: flex;
+}
+
+.free-shipping-banner .free-shipping-image .image{
+  width: 13px;
+  height: 12.43px;
 }
 .free-shipping-banner .free-shipping-text{
   font-weight: 400;
   font-size: 12px;
   line-height: 100%;
-  letter-spacing: 0%;
+  letter-spacing: normal;
   vertical-align: middle;
   color: #118B58;
+}
+
+.usp-list{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 9px;
+  margin: 0;
+  margin-bottom: 40px;
+  background: #F9F9F9;
+}
+
+.usp-list .vertical-usp-divider{
+  border-right: 1px solid rgba(0, 0, 0, 0.10);
+  height: 27px;
+  width: 0px;
+}
+
+.usp-list .vertical-usp-divider:first-of-type {
+  display: none;
+}
+
+.usp-list .usp-item{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.usp-list .usp-icon{
+  display: flex;
+}
+
+.usp-list .usp-text{
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: normal;
+  vertical-align: middle;
+  color: #000000;
 }

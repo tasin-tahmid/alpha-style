@@ -312,12 +312,13 @@
 									</div>
 								{%- when 'free_shipping_banner' -%}
 									<div class="free-shipping-banner" id="free-shipping-banner-{{ section.id }}" {{ block.shopify_attributes }}>
-										<div class="free-shipping-icon">
-											<img src="{{ block.settings.free_shipping_banner_image | image_url }}" alt="">
+										<div class="free-shipping-image">
+											<img src="{{ block.settings.free_shipping_banner_image | image_url }}" alt="free-shipping-icon" height="" width="" class="image">
 										</div>
 										<div class="free-shipping-text">{{ block.settings.free_shipping_banner_text }}</div>
 									</div>
-		
+								{%- when 'usp' -%}
+									{% render 'usp_list', block: block %}
 								{%- when 'description' -%}
 									<div class="product__description secondary_text {% if block.settings.description == blank and product.description != blank %} rte {% endif %}" {{ block.shopify_attributes }}>
 										{% if block.settings.description != blank %}
@@ -643,7 +644,7 @@
 									</div>
 		
 								{%- when 'buy_buttons' -%}
-									<div {{ block.shopify_attributes }} class="product__buy_buttons">
+									<div {{ block.shopify_attributes }} class="product__buy_buttons u-mb-24">
 										{%- liquid
 											assign gift_card_recipient_feature_active = false
 											if block.settings.show_gift_card_recipient and product.gift_card?
@@ -2072,6 +2073,58 @@ customElements.define('product-modal', ProductModal);
 					"label": "Free Shipping Banner Text",
 					"default": "Free shipping over $60"
 				},
+			]
+		},
+		{
+			"type": "usp",
+			"name": "USP List",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "header",
+					"content": "USP 1"
+				},
+				{
+					"type": "image_picker",
+					"id": "usp_image_1",
+					"label": "USP Icon 1"
+				},
+				{
+					"type": "inline_richtext",
+					"id": "usp_1",
+					"label": "USP 1",
+					"default": "Easy returns"
+				},
+				{
+					"type": "header",
+					"content": "USP 2"
+				},
+				{
+					"type": "image_picker",
+					"id": "usp_image_2",
+					"label": "USP Icon 2"
+				},
+				{
+					"type": "inline_richtext",
+					"id": "usp_2",
+					"label": "USP 2",
+					"default": "Fast shipping"
+				},
+				{
+					"type": "header",
+					"content": "USP 3"
+				},
+				{
+					"type": "image_picker",
+					"id": "usp_image_3",
+					"label": "USP Icon 3"
+				},
+				{
+					"type": "inline_richtext",
+					"id": "usp_3",
+					"label": "USP 3",
+					"default": "Secure checkout"
+				}
 			]
 		},
 	],

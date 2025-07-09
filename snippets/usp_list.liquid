@@ -1,0 +1,23 @@
+<ul class="usp-list">
+  {% for i in (1..3) %}
+    {% assign usp_text = 'usp_' | append: forloop.index %}
+    {% assign usp_text_main = block.settings[usp_text] %}
+    {% assign usp_image = 'usp_image_' | append: forloop.index %}
+    {% assign usp_image = block.settings[usp_image] %}
+    {% if usp_text_main != blank %}
+      <li class="vertical-usp-divider"></li>
+      <li class="usp-item">
+        {% if usp_image %}
+          <span class="usp-icon">
+            <img src="{{ usp_image | image_url }}" alt="" height="" width="">
+          </span>
+        {% endif %}
+        {% if usp_text_main %}
+          <span class="usp-text">
+            {{ usp_text_main }}
+          </span>
+        {% endif %}
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
