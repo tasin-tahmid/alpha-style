@@ -1,43 +1,45 @@
-<div class="c-size-guide">
-    <div class="c-size-guide__size-guide-opener">
-        Fits oversized – 
-        <button onclick="openModal()" class="c-size-guide__size-guide-opener-button">
-            check sizing guide
-        </button>
-    </div>
-
-    <div class="c-size-guide__modal" id="c-size-guide__modal">
-        <div class="c-size-guide__modal-content">
-            <button class="c-size-guide__close-icon" onclick="closeModal()">
-                {{- 'close_icon.svg' | inline_asset_content -}}
+{% if size_guide != blank %}
+    <div class="c-size-guide">
+        <div class="c-size-guide__size-guide-opener">
+            Fits oversized – 
+            <button onclick="openModal()" class="c-size-guide__size-guide-opener-button">
+                check sizing guide
             </button>
-            <h3 class="c-size-guide__modal-title">{{ block.settings.table_title }}</h3>
-            <div class="c-size-guide__modal-table-container">
-                <div  class="c-size-guide__table-title">
-                    {{ block.settings.table_header_text }}
-                </div>
-                <table class="c-size-guide__table">
-                    <thead>
-                        <tr>
-                        {% for header in size_guide[0] %}
-                            <th>{{ header }}</th>
-                        {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for row in size_guide offset:1 %}
-                        <tr>
-                            {% for value in row %}
-                            <td>{{ value }}</td>
+        </div>
+    
+        <div class="c-size-guide__modal" id="c-size-guide__modal">
+            <div class="c-size-guide__modal-content">
+                <button class="c-size-guide__close-icon" onclick="closeModal()">
+                    {{- 'close_icon.svg' | inline_asset_content -}}
+                </button>
+                <h3 class="c-size-guide__modal-title">{{ block.settings.table_title }}</h3>
+                <div class="c-size-guide__modal-table-container">
+                    <div  class="c-size-guide__table-title">
+                        {{ block.settings.table_header_text }}
+                    </div>
+                    <table class="c-size-guide__table">
+                        <thead>
+                            <tr>
+                            {% for header in size_guide[0] %}
+                                <th>{{ header }}</th>
                             {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in size_guide offset:1 %}
+                            <tr>
+                                {% for value in row %}
+                                <td>{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
+{% endif %}
 
 <script>
     function openModal() {

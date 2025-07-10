@@ -232,6 +232,14 @@
 											{% endif %}
 										{% endif %}
 									</div>
+								{%- when 'discount_banner' -%}
+									{% if product.compare_at_price != blank %}
+										<div class="product-discount-banner">
+											<span>
+												{{ block.settings.discount_banner_text }}
+											</span>
+										</div>
+									{% endif %}
 
 								{%- when 'tags' -%}
 									{%- if product.tags != blank -%}
@@ -365,7 +373,7 @@
 											{% if block.settings.picker_type == 'button' %}
 												<variant-radios
 													id="variant-radios-{{ section.id }}"
-													class="no-js-hidden variant-radios"
+													class="no-js-hidden variant-radios u-mb-12"
 													data-section="{{ section.id }}"
 													data-url="{{ product.url }}"
 													{{ block.shopify_attributes }}
@@ -477,7 +485,7 @@
 											{% else %}
 												<variant-radios
 													id="variant-radios-{{ section.id }}"
-													class="no-js-hidden variant-selects" 
+													class="no-js-hidden variant-selects u-mb-12" 
 													data-section="{{ section.id }}"
 													data-url="{{ product.url }}"
 													{{ block.shopify_attributes }}
@@ -2152,6 +2160,19 @@ customElements.define('product-modal', ProductModal);
 					"default": "Size Measurement (cm)"
 				},
 				
+			]
+		},
+		{
+			"type": "discount_banner",
+			"name": "Discount Banner",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "text",
+					"id": "discount_banner_text",
+					"label": "Discount Banner Text",
+					"default": "Up to 40% Off – Limited Time"
+				}
 			]
 		},
 	],
