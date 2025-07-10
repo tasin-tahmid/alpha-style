@@ -321,7 +321,7 @@
 								{%- when 'usp' -%}
 									{% render 'usp_list', block: block %}
 								{%- when 'size_guide' -%}
-									{% render 'size-guide', table_data: product.metafields.custom.size_guide %}
+									{% render 'size-guide', size_guide: product.metafields.custom.size_guide.value, block: block %}
 								{%- when 'description' -%}
 									<div class="product__description secondary_text {% if block.settings.description == blank and product.description != blank %} rte {% endif %}" {{ block.shopify_attributes }}>
 										{% if block.settings.description != blank %}
@@ -2137,19 +2137,21 @@ customElements.define('product-modal', ProductModal);
 			"settings": [
 				{
 					"type": "header",
-					"content": "USP 1"
+					"content": "Size Guide Table"
 				},
 				{
-					"type": "image_picker",
-					"id": "usp_image_1",
-					"label": "USP Icon 1"
+					"type": "text",
+					"id": "table_title",
+					"label": "Table Title",
+					"default": "Size guide"
 				},
 				{
-					"type": "inline_richtext",
-					"id": "usp_1",
-					"label": "USP 1",
-					"default": "Easy returns"
+					"type": "text",
+					"id": "table_header_text",
+					"label": "Table Header Text",
+					"default": "Size Measurement (cm)"
 				},
+				
 			]
 		},
 	],

@@ -11,7 +11,30 @@
             <button class="c-size-guide__close-icon" onclick="closeModal()">
                 {{- 'close_icon.svg' | inline_asset_content -}}
             </button>
-            <h3 class="c-size-guide__modal-heading">Size Guide</h3>
+            <h3 class="c-size-guide__modal-title">{{ block.settings.table_title }}</h3>
+            <div class="c-size-guide__modal-table-container">
+                <div  class="c-size-guide__table-title">
+                    {{ block.settings.table_header_text }}
+                </div>
+                <table class="c-size-guide__table">
+                    <thead>
+                        <tr>
+                        {% for header in size_guide[0] %}
+                            <th>{{ header }}</th>
+                        {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in size_guide offset:1 %}
+                        <tr>
+                            {% for value in row %}
+                            <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

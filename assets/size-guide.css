@@ -24,6 +24,8 @@
 
 .c-size-guide__modal {
     display: none;
+    flex-direction: column;
+    gap: 8px;
     position: fixed;
     z-index: 999;
     left: 0;
@@ -36,21 +38,29 @@
 }
 
 .c-size-guide__modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     background: #FFFFFF;
     padding: 32px;
-    width: 400px;
-    max-width: 90%;
+    width: 410px;
     position: relative;
 }
+@media (max-width: 768px) {
+    .c-size-guide__modal-content {
+        padding: 16px;
+        width: 343px;
+        max-width: 95%;
+    }
+}
 
-.c-size-guide__modal-heading{
+.c-size-guide__modal-title{
     margin: 0;
     font-weight: 500;
     font-size: 14px;
     line-height: 18.2px;
     letter-spacing: -0.28%;
     color: #000000;
-;
 }
 
 .c-size-guide__close-icon {
@@ -62,6 +72,89 @@
     border: none;
     background: none;
     cursor: pointer;
+    padding: 0;
+}
+@media (max-width: 768px) {
+    .c-size-guide__close-icon {
+        top: 6px;
+        right: 6px;
+    }
+}
+
+.c-size-guide__modal-table-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.c-size-guide__table-title{
+    border: 1px solid #CCCCCC;
+    border-bottom: 0;
+    padding: 14.5px 13px;
+
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+
+}
+
+.c-size-guide__table {
+    width: 100%;
+    border-collapse: collapse;
+    /* margin: 20px 0; */
+    border: 1px solid #CCCCCC;
+}
+.c-size-guide__table th,
+.c-size-guide__table td {
+    height: 40px;
+    width: 69px;
+    text-align: left;
+    border: 1px solid #CCCCCC;
+    padding-left: 20px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19.6px;
+    letter-spacing: normal;
+    vertical-align: middle;
+    
+}
+@media (max-width: 768px) {
+    .c-size-guide__table td {
+        width: 61.4px;
+        padding-left: 12px;
+    }
+}
+.c-size-guide__table td:first-child {
+    font-weight: 700;
+}
+
+.c-size-guide__table th{
+    text-align: center;
+    padding: 0;
+    font-weight: 500;
+    font-size: 8.58px;
+    line-height: 12.6px;
+    letter-spacing: -0.18px;
+    text-align: center;
+    vertical-align: middle;
+
+}
+
+.c-size-guide__table tr:first-child th {
+    border-top: none;
+}
+.c-size-guide__table tr:last-child td {
+    border-bottom: none;
+}
+.c-size-guide__table th:first-child,
+.c-size-guide__table td:first-child {
+    border-left: none;
+}
+.c-size-guide__table th:last-child,
+.c-size-guide__table td:last-child {
+    border-right: none;
 }
 
 body.no-scroll {
