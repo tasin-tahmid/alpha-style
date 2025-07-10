@@ -2742,6 +2742,7 @@ main .shopify-section:first-child.not-margin .section--have-overlay:not(.article
 
 .product-discount-banner{
   border-radius: 3px;
+  margin-bottom: 4px;
   padding: 0 6px;
   color: #BC1618;
   background-color: #FFD4D5;
