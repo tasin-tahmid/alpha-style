@@ -1298,6 +1298,13 @@ main .shopify-section:first-child.not-margin .section--have-overlay:not(.article
   margin: 4rem 0;
   pointer-events: all;
 }
+.product-parameters {
+  margin: 4rem 0;
+  pointer-events: all;
+}
+.product-parameters.u-mb-12 {
+  margin-bottom: 12px;
+}
 .product-parameters variant-radios,
 .product-parameters .variant-selects {
   display: flex;
@@ -1310,6 +1317,10 @@ main .shopify-section:first-child.not-margin .section--have-overlay:not(.article
   .product-parameters .variant-selects {
     margin-bottom: 1.6rem;
   }
+}
+
+.product-parameters variant-radios.u-mb-12 {
+  margin-bottom: 12px;
 }
 .product-parameters variant-radios {
   flex-direction: column;
@@ -2727,4 +2738,18 @@ main .shopify-section:first-child.not-margin .section--have-overlay:not(.article
   letter-spacing: normal;
   vertical-align: middle;
   color: #000000;
+}
+
+.product-discount-banner{
+  border-radius: 3px;
+  margin-bottom: 4px;
+  padding: 0 6px;
+  color: #BC1618;
+  background-color: #FFD4D5;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 17px;
+  vertical-align: middle;
 }

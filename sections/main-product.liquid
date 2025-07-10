@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="all">
 <link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'section-product-recommendations.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'size-guide.css' | asset_url }}">
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'copy.js' | asset_url }}" defer="defer"></script>
@@ -231,6 +232,14 @@
 											{% endif %}
 										{% endif %}
 									</div>
+								{%- when 'discount_banner' -%}
+									{% if product.compare_at_price != blank %}
+										<div class="product-discount-banner">
+											<span>
+												{{ block.settings.discount_banner_text }}
+											</span>
+										</div>
+									{% endif %}
 
 								{%- when 'tags' -%}
 									{%- if product.tags != blank -%}
@@ -319,6 +328,8 @@
 									</div>
 								{%- when 'usp' -%}
 									{% render 'usp_list', block: block %}
+								{%- when 'size_guide' -%}
+									{% render 'size-guide', size_guide: product.metafields.custom.size_guide.value, block: block %}
 								{%- when 'description' -%}
 									<div class="product__description secondary_text {% if block.settings.description == blank and product.description != blank %} rte {% endif %}" {{ block.shopify_attributes }}>
 										{% if block.settings.description != blank %}
@@ -357,12 +368,12 @@
 									</div>
 		
 								{%- when 'variant_picker' -%}
-									<div class="product-parameters {% if block.settings.picker_type == 'button' %}product-parameters-radius{% endif %}">
+									<div class="product-parameters u-mb-12 {% if block.settings.picker_type == 'button' %}product-parameters-radius{% endif %}">
 										{% unless product.has_only_default_variant %}
 											{% if block.settings.picker_type == 'button' %}
 												<variant-radios
 													id="variant-radios-{{ section.id }}"
-													class="no-js-hidden variant-radios"
+													class="no-js-hidden variant-radios u-mb-12"
 													data-section="{{ section.id }}"
 													data-url="{{ product.url }}"
 													{{ block.shopify_attributes }}
@@ -474,7 +485,7 @@
 											{% else %}
 												<variant-radios
 													id="variant-radios-{{ section.id }}"
-													class="no-js-hidden variant-selects" 
+													class="no-js-hidden variant-selects u-mb-12" 
 													data-section="{{ section.id }}"
 													data-url="{{ product.url }}"
 													{{ block.shopify_attributes }}
@@ -2124,6 +2135,43 @@ customElements.define('product-modal', ProductModal);
 					"id": "usp_3",
 					"label": "USP 3",
 					"default": "Secure checkout"
+				}
+			]
+		},
+		{
+			"type": "size_guide",
+			"name": "Size Guide",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "header",
+					"content": "Size Guide Table"
+				},
+				{
+					"type": "text",
+					"id": "table_title",
+					"label": "Table Title",
+					"default": "Size guide"
+				},
+				{
+					"type": "text",
+					"id": "table_header_text",
+					"label": "Table Header Text",
+					"default": "Size Measurement (cm)"
+				},
+				
+			]
+		},
+		{
+			"type": "discount_banner",
+			"name": "Discount Banner",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "text",
+					"id": "discount_banner_text",
+					"label": "Discount Banner Text",
+					"default": "Up to 40% Off – Limited Time"
 				}
 			]
 		},
