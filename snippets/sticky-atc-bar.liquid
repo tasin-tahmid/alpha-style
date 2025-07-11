@@ -18,16 +18,12 @@
                 <div class="c-sticky-atc-bar__product-price">
                     {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--product' -%}
                     <div class="product__badge">
-                        {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price and product.selected_or_first_available_variant.available and settings.badge_sale_show -%}
-                            <span class="badge badge--sale color-{{ settings.badge_sale_color_scheme }} colored-badge" aria-hidden="true">
-                                    {% if settings.badge_sale_type == "sale" %}
-                                        {{- 'products.product.on_sale' | t -}}
-                                    {% else %}
-                                        <span>
-                                            -{{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%
-                                        </span>
-                                    {% endif %}
+                        {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price and product.selected_or_first_available_variant.available -%}
+                            <span class="badge colored-badge" aria-hidden="true">    
+                                <span>
+                                    -{{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%
                                 </span>
+                            </span>
                         {%- endif -%}
                     </div>
                 </div>
