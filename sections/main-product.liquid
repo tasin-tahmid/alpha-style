@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'section-product-recommendations.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'size-guide.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'sticky-atc-bar.css' | asset_url }}">
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'copy.js' | asset_url }}" defer="defer"></script>
@@ -21,6 +22,8 @@
 	<link id="ModelViewerStyle" rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css" media="print" onload="this.media='all'">
 	<link id="ModelViewerOverride" rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
+
+
 
 <section id="MainProduct-{{ section.id }}" data-section="{{ section.id }}" data-color="dark" class="{% if section.settings.gallery_type == 'static_column_aside' or section.settings.gallery_type == 'two_column_aside' %}{% if section.settings.header_overlay == true %}section--have-overlay{% endif %}{% endif %}">
 	<div class="product {% if product.media.size > 0 %}row{% else %}product--no-media{% endif %}">
@@ -69,7 +72,7 @@
 									{%- for media in product.media -%}
 										{%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
 											<div class="product__media-item swiper-slide{% if media.media_type != 'image' %} product__media-item--full{% endif %} {% if variant_images contains media.src %} product__media-item--variant{% endif %} {% if section.settings.image_fit == 'contain' %} product__media-item--contain{% endif %}"
-													 data-media-id="{{ section.id }}-{{ media.id }}"
+													data-media-id="{{ section.id }}-{{ media.id }}"
 											>
 												{% render 'product-thumbnail', media: media, position: forloop.index, modal_id: section.id, lazy_load: false, class: 'img-responsive' %}
 												{% if section.settings.gallery_type == 'two_column_aside' and forloop.index == 1 %}
@@ -1459,6 +1462,8 @@
 	</script>    
 </section>
 
+{%render 'sticky-atc-bar', product: product, settings: section.settings %}
+
 {% javascript %}
 class ProductModal extends ModalDialog {
 	constructor() {
@@ -2181,6 +2186,12 @@ customElements.define('product-modal', ProductModal);
 			"type": "header",
 			"content": "t:sections.main-product.settings.header.content",
 			"info": "t:sections.main-product.settings.header.info"
+		},
+		{
+			"type": "text",
+			"id": "sticky_atc_discount_banner",
+			"label": "Sticky ATC Discount Banner Text",
+			"default": "Up to 40% Off Applied"
 		},
 		{
 			"type": "select",

@@ -1,0 +1,185 @@
+<div class="c-sticky-atc-bar">
+    <div class="c-sticky-atc-bar__product-information">
+        <div class="c-sticky-atc-bar__variant-image">
+            {%- if product.selected_or_first_available_variant.featured_media != null -%}
+                {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+                <img src="{{ featured_media | image_url }}" alt="" height="" width="" class="image">
+            {% else %}
+                {{ 'product-1' | placeholder_svg_tag:"image" }}
+            {% endif %}
+
+
+        </div>
+        <div class="c-sticky-atc-bar__product-details">
+            <h1 class="c-sticky-atc-bar__product-title">
+                {{ product.title | escape }}
+            </h1>
+            <div class="c-sticky-atc-bar__product-price-container">
+                <div class="c-sticky-atc-bar__product-price">
+                    {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--product' -%}
+                    <div class="product__badge">
+                        {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price and product.selected_or_first_available_variant.available and settings.badge_sale_show -%}
+                            <span class="badge badge--sale color-{{ settings.badge_sale_color_scheme }} colored-badge" aria-hidden="true">
+                                    {% if settings.badge_sale_type == "sale" %}
+                                        {{- 'products.product.on_sale' | t -}}
+                                    {% else %}
+                                        <span>
+                                            -{{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%
+                                        </span>
+                                    {% endif %}
+                                </span>
+                        {%- endif -%}
+                    </div>
+                </div>
+                {% if product.compare_at_price %}
+                    <div class="c-sticky-atc-bar__discount-banner">{{ settings.sticky_atc_discount_banner }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+    <div class="c-sticky-atc-bar__button-container">
+        <div class="quantity">
+            <button id="sticky-atc-bar-minus-button" class="quantity__button no-js-hidden focus-inset disabled" name="minus" type="button"
+                onclick="decreaseButtonClick()"
+            >
+                    <span class="visually-hidden">
+                        {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
+                    </span>
+                {% render 'icon-minus' %}
+            </button>
+            <input
+                class="quantity__input focus-inset"
+                type="number"
+                name="quantity"
+                id="sticky-atc-bar-quantity-input"
+                data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                    data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                    max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                {% endif %}
+                step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                form="{{ product_form_id }}"
+            />
+            <button id="sticky-atc-bar-plus-button" class="quantity__button no-js-hidden focus-inset" name="plus" type="button"
+                onclick="increaseButtonClick()"
+            >
+                    <span class="visually-hidden">
+                        {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
+                    </span>
+                {% render 'icon-plus' %}
+            </button>
+        </div>
+        <div class="c-sticky-atc-bar__add-to-cart-button">
+            <button
+                onclick="addToCartButtonClick()"
+                name="add"
+                class="product-form__submit button button--tertiary focus-inset"
+                {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+            >
+                {%- if product.selected_or_first_available_variant.available -%}
+                    <span>
+                        {{ 'products.product.add_to_cart' | t }}
+                    </span>
+                    <div class="loading-overlay__spinner hidden">
+                        {%- render 'icon-loading' -%}	
+                    </div>
+                {%- else -%}
+                    <span>
+                        {{ 'products.product.sold_out' | t }}
+                    </span>
+                {%- endif -%}
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function decreaseButtonClick(){
+        const stickyQuantityInput = document.getElementById('sticky-atc-bar-quantity-input');
+        const stickyMinusButton = document.getElementById('sticky-atc-bar-minus-button');
+        const allQuantityInputs = document.querySelectorAll('product-form quantity-input');
+        const quantityInput = allQuantityInputs[0].querySelector('input[name="quantity"]');
+        const minusButton = allQuantityInputs[0].querySelector('button[name="minus"]');
+        
+        minusButton.click();
+
+        setTimeout(() => {
+            stickyQuantityInput.value = quantityInput.value;
+
+            if(quantityInput.value === '1'){
+                stickyMinusButton.classList.add('disabled');
+            }
+        }, 200);
+        
+    }
+    function increaseButtonClick(){
+        const stickyQuantityInput = document.getElementById('sticky-atc-bar-quantity-input');
+        const stickyMinusButton = document.getElementById('sticky-atc-bar-minus-button');
+        const allQuantityInputs = document.querySelectorAll('product-form quantity-input');
+        const quantityInput = allQuantityInputs[0].querySelector('input[name="quantity"]');
+        const plusButton = allQuantityInputs[0].querySelector('button[name="plus"]');
+        
+        plusButton.click();
+        console.log("After click, value:",stickyMinusButton.classList.contains('disabled'));
+        setTimeout(() => {
+            stickyQuantityInput.value = quantityInput.value;
+
+            if(quantityInput.value > 1 && stickyMinusButton.classList.contains('disabled')){
+                stickyMinusButton.classList.remove('disabled');
+            }
+        }, 200);
+
+
+
+    }
+
+    function addToCartButtonClick(){
+        const addToCartList = document.querySelectorAll('.product__buy_buttons .product-form__submit');
+
+        console.log("Add To cart list:", addToCartList?.length);
+        if(addToCartList.length > 0){
+            addToCartList[0].click();
+        }
+        
+    }
+
+
+    function isInViewport(element) {
+        if (!element) return false;
+
+        const rect = element.getBoundingClientRect();
+        return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    function checkVisibilityOnLoadAndScroll() {
+        const addToCartList = document.querySelectorAll('.product__buy_buttons .product-form__submit');
+        const stikcyAtcBar = document.querySelector('.c-sticky-atc-bar');
+
+        if(addToCartList.length > 0){
+            if (isInViewport(addToCartList[0])) {
+                console.log('Element is in the viewport!');
+                stikcyAtcBar.classList.add("hide-atc-bar");
+                stikcyAtcBar.classList.remove("show-atc-bar");
+            } else {
+                stikcyAtcBar.classList.add("show-atc-bar");
+                stikcyAtcBar.classList.remove("hide-atc-bar");
+                console.log('Element is NOT in the viewport.');
+            }
+        } 
+
+    }
+
+    // Run on page load
+    window.addEventListener('DOMContentLoaded', checkVisibilityOnLoadAndScroll);
+
+    // Run on scroll
+    window.addEventListener('scroll', checkVisibilityOnLoadAndScroll);
+</script>
