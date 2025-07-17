@@ -21,6 +21,11 @@
 .price-item--sale {
   color: rgb(var(--color-card-price-new));
 }
+
+.price-item.u-font-semibold{
+  font-weight: 600;
+}
+
 .price--on-sale .price-item--regular {
   text-decoration: none;
   text-underline-offset: -0.4rem;

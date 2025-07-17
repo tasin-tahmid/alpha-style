@@ -1252,6 +1252,11 @@ main .shopify-section:first-child.not-margin .section--have-overlay:not(.article
 .product__tax {
   width: 100%;
 }
+.product__tax.u-mt-7 {
+  margin-top: 7px;
+}
+
+
 .product .pickup-availability pickup-availability-preview {
   margin-bottom: 1rem;
 }
