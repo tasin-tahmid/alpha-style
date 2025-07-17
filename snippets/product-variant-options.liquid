@@ -133,6 +133,7 @@
 		{% if block.settings.picker_type == 'button' and modal != true %}
 			<input
 				type="radio"
+				class="namesss-test"
 				id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
 				name="{{ option.name }}"
 				value="{{ value | escape }}"
@@ -145,6 +146,7 @@
 				{% if option_disabled %}
 					class="disabled"
 				{% endif %}
+				onchange="updateVariantImage()"
 			>
 			{%- if option_name == option_name_first and settings.swatch_type == 'variant_image' -%}
 				<label
@@ -223,3 +225,9 @@
     });
   </script>
 {% endif %}
+
+<script>
+	function updateVariantImage(){
+		console.log("Selected variant id:::", document.querySelector('#sticky-atc-bar-selected-variant-image'));
+	}
+</script>

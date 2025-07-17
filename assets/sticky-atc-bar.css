@@ -115,6 +115,12 @@
     padding: 0 !important;
 }
 
+.c-sticky-atc-bar__button-and-error{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .c-sticky-atc-bar__button-container{
     display: flex;
     align-items: center;
@@ -129,4 +135,21 @@
 .c-sticky-atc-bar__add-to-cart-button .product-form__submit{
     width: 223px;
     height: 36px;
+}
+
+.c-sticky-atc-bar__error{
+    display: none;
+    gap: 4px;
+    height: 13px;
+    align-items: center;
+}
+
+.c-sticky-atc-bar__error svg{
+    width: 12px;
+    height: 12px;
+}
+
+.c-sticky-atc-bar__error-message{
+    font-size: 12px;
+    letter-spacing: normal;
 }

@@ -1,9 +1,10 @@
+<div id="image-test-list" data-product-variant={{ product |json }}></div>
 <div class="c-sticky-atc-bar">
     <div class="c-sticky-atc-bar__product-information">
         <div class="c-sticky-atc-bar__variant-image">
             {%- if product.selected_or_first_available_variant.featured_media != null -%}
                 {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
-                <img src="{{ featured_media | image_url }}" alt="" height="" width="" class="image">
+                <img src="{{ featured_media | image_url }}" alt="" height="" width="" class="image" id="sticky-atc-bar-selected-variant-image">
             {% else %}
                 <img
                     src="data:image/svg+xml,%3Csvg%20width%3D%2250%22%20height%3D%2267%22%20viewBox%3D%220%200%2050%2067%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2250%22%20height%3D%2267%22%20fill%3D%22%23F5F5F5%22%2F%3E%3Cg%20opacity%3D%220.3%22%3E%3Cpath%20d%3D%22M17.5%2036.8333L23.3333%2034.3333L26.6667%2035.8483M29.0658%2041.1008L30.8333%2039.3333M30.8333%2039.3333L32.6008%2037.5658M30.8333%2039.3333L29.0658%2037.5658M30.8333%2039.3333L32.6008%2041.1008M28.3333%2031.8333C27.8913%2031.8333%2027.4674%2031.6577%2027.1548%2031.3452C26.8423%2031.0326%2026.6667%2030.6087%2026.6667%2030.1667C26.6667%2029.7246%2026.8423%2029.3007%2027.1548%2028.9882C27.4674%2028.6756%2027.8913%2028.5%2028.3333%2028.5C28.7754%2028.5%2029.1993%2028.6756%2029.5118%2028.9882C29.8244%2029.3007%2030%2029.7246%2030%2030.1667C30%2030.6087%2029.8244%2031.0326%2029.5118%2031.3452C29.1993%2031.6577%2028.7754%2031.8333%2028.3333%2031.8333Z%22%20stroke%3D%22black%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M25.8333%2041H18C17.8674%2041%2017.7402%2040.9473%2017.6464%2040.8536C17.5527%2040.7598%2017.5%2040.6326%2017.5%2040.5V26.5C17.5%2026.3674%2017.5527%2026.2402%2017.6464%2026.1464C17.7402%2026.0527%2017.8674%2026%2018%2026H32C32.1326%2026%2032.2598%2026.0527%2032.3536%2026.1464C32.4473%2026.2402%2032.5%2026.3674%2032.5%2026.5V34.3333%22%20stroke%3D%22black%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"
@@ -40,60 +41,71 @@
         </div>
 
     </div>
-    <div class="c-sticky-atc-bar__button-container">
-        <div class="quantity">
-            <button id="sticky-atc-bar-minus-button" class="quantity__button no-js-hidden focus-inset disabled" name="minus" type="button"
-                onclick="decreaseButtonClick()"
-            >
-                    <span class="visually-hidden">
-                        {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
-                    </span>
-                {% render 'icon-minus' %}
-            </button>
-            <input
-                class="quantity__input focus-inset"
-                type="number"
-                name="quantity"
-                id="sticky-atc-bar-quantity-input"
-                data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
-                    data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-                    max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-                {% endif %}
-                step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
-                value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                form="{{ product_form_id }}"
-            />
-            <button id="sticky-atc-bar-plus-button" class="quantity__button no-js-hidden focus-inset" name="plus" type="button"
-                onclick="increaseButtonClick()"
-            >
-                    <span class="visually-hidden">
-                        {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
-                    </span>
-                {% render 'icon-plus' %}
-            </button>
+    <div class="c-sticky-atc-bar__button-and-error">
+        <div class="c-sticky-atc-bar__button-container">
+            <div class="quantity">
+                <button id="sticky-atc-bar-minus-button" class="quantity__button no-js-hidden focus-inset disabled" name="minus" type="button"
+                    onclick="decreaseButtonClick()"
+                >
+                        <span class="visually-hidden">
+                            {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
+                        </span>
+                    {% render 'icon-minus' %}
+                </button>
+                <input
+                    class="quantity__input focus-inset"
+                    type="number"
+                    name="quantity"
+                    id="sticky-atc-bar-quantity-input"
+                    data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                    min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                    {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                        data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                        max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                    {% endif %}
+                    step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                    value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                    form="{{ product_form_id }}"
+                />
+                <button id="sticky-atc-bar-plus-button" class="quantity__button no-js-hidden focus-inset" name="plus" type="button"
+                    onclick="increaseButtonClick()"
+                >
+                        <span class="visually-hidden">
+                            {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
+                        </span>
+                    {% render 'icon-plus' %}
+                </button>
+            </div>
+            <div class="c-sticky-atc-bar__add-to-cart-button">
+                <button
+                    onclick="addToCartButtonClick()"
+                    name="add"
+                    class="product-form__submit button button--tertiary focus-inset"
+                    {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                >
+                    {%- if product.selected_or_first_available_variant.available -%}
+                        <span>
+                            {{ 'products.product.add_to_cart' | t }}
+                        </span>
+                        <div class="loading-overlay__spinner hidden">
+                            {%- render 'icon-loading' -%}	
+                        </div>
+                    {%- else -%}
+                        <span>
+                            {{ 'products.product.sold_out' | t }}
+                        </span>
+                    {%- endif -%}
+                </button>
+            </div>
         </div>
-        <div class="c-sticky-atc-bar__add-to-cart-button">
-            <button
-                onclick="addToCartButtonClick()"
-                name="add"
-                class="product-form__submit button button--tertiary focus-inset"
-                {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
-            >
-                {%- if product.selected_or_first_available_variant.available -%}
-                    <span>
-                        {{ 'products.product.add_to_cart' | t }}
-                    </span>
-                    <div class="loading-overlay__spinner hidden">
-                        {%- render 'icon-loading' -%}	
-                    </div>
-                {%- else -%}
-                    <span>
-                        {{ 'products.product.sold_out' | t }}
-                    </span>
-                {%- endif -%}
-            </button>
+        <div class="c-sticky-atc-bar__error" role="alert">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13">
+                <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"></circle>
+                <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"></circle>
+                <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"></path>
+                <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7"></path>
+            </svg>
+            <span class="c-sticky-atc-bar__error-message"></span>
         </div>
     </div>
 </div>
@@ -125,7 +137,7 @@
         const plusButton = allQuantityInputs[0].querySelector('button[name="plus"]');
         
         plusButton.click();
-        console.log("After click, value:",stickyMinusButton.classList.contains('disabled'));
+        {% comment %} console.log("After click, value:",stickyMinusButton.classList.contains('disabled')); {% endcomment %}
         setTimeout(() => {
             stickyQuantityInput.value = quantityInput.value;
 
@@ -133,21 +145,28 @@
                 stickyMinusButton.classList.remove('disabled');
             }
         }, 200);
-
-
-
     }
 
     function addToCartButtonClick(){
         const addToCartList = document.querySelectorAll('.product__buy_buttons .product-form__submit');
 
-        console.log("Add To cart list:", addToCartList?.length);
+        {% comment %} console.log("Add To cart list:", addToCartList?.length); {% endcomment %}
         if(addToCartList.length > 0){
             addToCartList[0].click();
         }
         
-    }
+        setTimeout(() => {
+            const mainAtcError = document.querySelector('.product-form__error-message-wrapper .product-form__error-message');
+            const stickyAtcError = document.querySelector('.c-sticky-atc-bar__error');
+            const stickyAtcErrorMessage = document.querySelector('.c-sticky-atc-bar__error .c-sticky-atc-bar__error-message');
 
+            if(mainAtcError.innerText){
+                console.log("atc errors", mainAtcError.innerHTML);
+                stickyAtcErrorMessage.innerText = mainAtcError.innerText;
+                stickyAtcError.style.display = "flex";
+            }
+        }, 1000);
+    }
 
     function isInViewport(element) {
         if (!element) return false;
@@ -164,24 +183,81 @@
     function checkVisibilityOnLoadAndScroll() {
         const addToCartList = document.querySelectorAll('.product__buy_buttons .product-form__submit');
         const stikcyAtcBar = document.querySelector('.c-sticky-atc-bar');
+        const stickyQuantityInput = document.getElementById('sticky-atc-bar-quantity-input');
+        const allQuantityInputs = document.querySelectorAll('product-form quantity-input');
+        const quantityInput = allQuantityInputs[0].querySelector('input[name="quantity"]');
+
+        const mainAtcError = document.querySelector('.product-form__error-message-wrapper .product-form__error-message');
+        const stickyAtcError = document.querySelector('.c-sticky-atc-bar__error');
+        const stickyAtcErrorMessage = document.querySelector('.c-sticky-atc-bar__error .c-sticky-atc-bar__error-message');
 
         if(addToCartList.length > 0){
             if (isInViewport(addToCartList[0])) {
-                console.log('Element is in the viewport!');
+                adjustOtherElementsSize("remove");
                 stikcyAtcBar.classList.add("hide-atc-bar");
                 stikcyAtcBar.classList.remove("show-atc-bar");
             } else {
+                stickyQuantityInput.value = quantityInput.value;
+                stickyAtcErrorMessage.innerText = mainAtcError.innerText;
+                if(stickyAtcErrorMessage?.innerText){
+                    stickyAtcError.style.display = "flex";
+                }
+
+                adjustOtherElementsSize("add");
                 stikcyAtcBar.classList.add("show-atc-bar");
                 stikcyAtcBar.classList.remove("hide-atc-bar");
-                console.log('Element is NOT in the viewport.');
             }
         } 
 
+        const el = document.getElementById('image-test-list');
+        const rawData = el.getAttribute('data-product-variant');
+        const jsonString = rawData.replace(/&quot;/g, '"');
+        const selectedVariant = JSON.parse(jsonString);
+
+        console.log("Selected Variant:", selectedVariant);
+        console.log("Variant ID:", selectedVariant.id);
+        console.log("Title:", selectedVariant.title);
+    }
+
+    function adjustOtherElementsSize(status){
+        const footer = document.getElementsByTagName("footer")[0];
+        const countrySelectorRoot = document.getElementsByTagName("selector-root")[0];
+        const scrollToTop = document.querySelector(".scroll-top"); 
+
+        console.log(footer);
+        console.log(countrySelectorRoot);
+        console.log(scrollToTop);
+
+        if(status == "add"){
+            if(footer){
+                footer.style.marginBottom = "90px";
+            }
+            
+            if (countrySelectorRoot) {
+                countrySelectorRoot.style.bottom = "120px";
+            }
+
+            if (scrollToTop) {
+                scrollToTop.style.bottom = "110px";
+            }
+        }
+        if(status == "remove"){
+            if(footer){
+                footer.style.marginBottom = "";
+            }
+            if (countrySelectorRoot) {
+                countrySelectorRoot.style.bottom = "20px";
+            }
+            if (scrollToTop) {
+                scrollToTop.style.bottom = "8px";
+            }
+        }
     }
 
     // Run on page load
     window.addEventListener('DOMContentLoaded', checkVisibilityOnLoadAndScroll);
-
+    
     // Run on scroll
     window.addEventListener('scroll', checkVisibilityOnLoadAndScroll);
 </script>
+

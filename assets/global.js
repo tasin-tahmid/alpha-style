@@ -1288,6 +1288,7 @@ class VariantSelects extends HTMLElement {
 		this.addEventListener("change", this.onVariantChange);
 	}
 
+
 	onVariantChange() {
 		this.updateOptions();
 		this.updateMasterId();
@@ -1351,32 +1352,37 @@ class VariantSelects extends HTMLElement {
 		);
 
 		const parent = newMedia.parentElement;
-
+		
 		const swiperWrappers = document.querySelectorAll(".product__media-wrapper");
-
+		
 		swiperWrappers.forEach((elem) => {
 			if (!this.isHidden(elem)) {
 				const newMedia = elem.querySelector(
 					`[data-media-id="${this.dataset.section}-${this.currentVariant.featured_media.id}"]`
 				);
-
+				
 				if (elem.querySelector(".js-media-list")) {
 					elem
+					.querySelector(".js-media-list")
+					.swiper.slideTo(
+						elem
 						.querySelector(".js-media-list")
-						.swiper.slideTo(
-							elem
-								.querySelector(".js-media-list")
-								.swiper.slides.indexOf(newMedia)
-						);
+						.swiper.slides.indexOf(newMedia)
+					);
 				} else {
 					newMedia && parent.prepend(newMedia);
-
+					
 					window.setTimeout(() => {
 						parent.scroll(0, 0);
 					});
 				}
 			}
 		});
+		
+		const stickyAtcImage = document.querySelector(".c-sticky-atc-bar__variant-image .image");
+		if(stickyAtcImage){
+			stickyAtcImage.src = this.currentVariant.featured_media.preview_image.src;
+		}
 	}
 
 	updateURL() {
