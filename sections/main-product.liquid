@@ -1140,7 +1140,7 @@
 			</div>
 		</div>
 	</div>
-	{%- for block in section.blocks -%}
+	{% comment %} {%- for block in section.blocks -%}
 		{%- case block.type -%}
 			{%- when 'floated_form' -%}
 				<div 
@@ -1199,7 +1199,7 @@
 					</div>
 				</div>
 		{% endcase %}
-	{% endfor %}
+	{% endfor %} {% endcomment %}
 
 	<product-modal id="ProductModal-{{ section.id }}" class="product-media-modal">
 		<div class="product-media-modal__dialog container" role="dialog" aria-label="{{ 'products.modal.label' | t }}" aria-modal="true" tabindex="-1">

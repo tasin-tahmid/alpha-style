@@ -1,3 +1,6 @@
+body:not(:has(.c-sticky-atc-bar.hide-atc-bar)) selector-root{
+    bottom: 120px;
+}
 .c-sticky-atc-bar{
     height: 90px;
     width: 100%;
@@ -34,6 +37,10 @@
     gap: 16px;
 }
 
+.c-sticky-atc-bar__variant-image {
+    height: 69px;
+    border: 1px solid #000000;
+}
 @media (max-width: 990px) {
     .c-sticky-atc-bar__variant-image{
         display: none;
@@ -43,7 +50,6 @@
 .c-sticky-atc-bar__variant-image .image{
     height: 67px;
     width: 50px;
-    border: 1px solid #000000;
 }
 
 .c-sticky-atc-bar__product-details{
