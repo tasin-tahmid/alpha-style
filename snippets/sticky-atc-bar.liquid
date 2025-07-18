@@ -1,5 +1,5 @@
 <div id="image-test-list" data-product-variant={{ product |json }}></div>
-<div class="c-sticky-atc-bar">
+<div class="c-sticky-atc-bar hide-atc-bar">
     <div class="c-sticky-atc-bar__product-information">
         <div class="c-sticky-atc-bar__variant-image">
             {%- if product.selected_or_first_available_variant.featured_media != null -%}
@@ -181,30 +181,41 @@
     }
 
     function checkVisibilityOnLoadAndScroll() {
+
         const addToCartList = document.querySelectorAll('.product__buy_buttons .product-form__submit');
         const stikcyAtcBar = document.querySelector('.c-sticky-atc-bar');
+
         const stickyQuantityInput = document.getElementById('sticky-atc-bar-quantity-input');
         const allQuantityInputs = document.querySelectorAll('product-form quantity-input');
         const quantityInput = allQuantityInputs[0].querySelector('input[name="quantity"]');
 
+        const mainAtcErrorWrapper = document.querySelector('.product-form__error-message-wrapper');
         const mainAtcError = document.querySelector('.product-form__error-message-wrapper .product-form__error-message');
         const stickyAtcError = document.querySelector('.c-sticky-atc-bar__error');
         const stickyAtcErrorMessage = document.querySelector('.c-sticky-atc-bar__error .c-sticky-atc-bar__error-message');
+
+        console.log("value::", stickyAtcErrorMessage?.innerText);
+        console.log("get attibute::",mainAtcErrorWrapper.hidden);
 
         if(addToCartList.length > 0){
             if (isInViewport(addToCartList[0])) {
                 adjustOtherElementsSize("remove");
                 stikcyAtcBar.classList.add("hide-atc-bar");
-                stikcyAtcBar.classList.remove("show-atc-bar");
+                {% comment %} stikcyAtcBar.classList.remove("show-atc-bar"); {% endcomment %}
             } else {
+
+
                 stickyQuantityInput.value = quantityInput.value;
                 stickyAtcErrorMessage.innerText = mainAtcError.innerText;
-                if(stickyAtcErrorMessage?.innerText){
+                if(!mainAtcErrorWrapper.hidden && stickyAtcErrorMessage?.innerText){
                     stickyAtcError.style.display = "flex";
+                }else{
+                    stickyAtcError.style.display = "none";
+
                 }
 
                 adjustOtherElementsSize("add");
-                stikcyAtcBar.classList.add("show-atc-bar");
+                {% comment %} stikcyAtcBar.classList.add("show-atc-bar"); {% endcomment %}
                 stikcyAtcBar.classList.remove("hide-atc-bar");
             }
         } 
@@ -223,10 +234,6 @@
         const footer = document.getElementsByTagName("footer")[0];
         const countrySelectorRoot = document.getElementsByTagName("selector-root")[0];
         const scrollToTop = document.querySelector(".scroll-top"); 
-
-        console.log(footer);
-        console.log(countrySelectorRoot);
-        console.log(scrollToTop);
 
         if(status == "add"){
             if(footer){

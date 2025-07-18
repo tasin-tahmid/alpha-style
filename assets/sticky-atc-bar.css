@@ -2,7 +2,7 @@
     height: 90px;
     width: 100%;
     position: fixed;
-    bottom: -100%;
+    bottom: 0;
     z-index: 11;
     border: 1px solid #CCCCCC;
     background: #FFFFFF;
@@ -24,9 +24,9 @@
 .c-sticky-atc-bar.hide-atc-bar{
     bottom: -100%;
 }
-.c-sticky-atc-bar.show-atc-bar{
+/* .c-sticky-atc-bar.show-atc-bar{
     bottom: 0;
-}
+} */
 
 .c-sticky-atc-bar__product-information{
     display: flex;

@@ -18,6 +18,12 @@
             "heading_size": "h2"
           }
         },
+        "discount_banner_LHzLzA": {
+          "type": "discount_banner",
+          "settings": {
+            "discount_banner_text": "Up to 40% Off – Limited Time"
+          }
+        },
         "price": {
           "type": "price",
           "settings": {}
@@ -37,6 +43,13 @@
             "size_guide_header": "",
             "size_guide_description": "",
             "page": ""
+          }
+        },
+        "size_guide_XjgXgM": {
+          "type": "size_guide",
+          "settings": {
+            "table_title": "Size guide",
+            "table_header_text": "Size Measurement (cm)"
           }
         },
         "buy_buttons": {
@@ -85,13 +98,6 @@
             "show_share_copy": true
           }
         },
-        "floated_form": {
-          "type": "floated_form",
-          "settings": {
-            "show_dynamic_checkout": true,
-            "show_quantity": true
-          }
-        },
         "description_jifzzJ": {
           "type": "description",
           "settings": {
@@ -101,17 +107,19 @@
       },
       "block_order": [
         "title",
+        "discount_banner_LHzLzA",
         "price",
         "inventory",
         "variant_picker",
+        "size_guide_XjgXgM",
         "buy_buttons",
         "free_shipping_banner_3BfqT8",
         "usp_NL78qr",
         "share",
-        "floated_form",
         "description_jifzzJ"
       ],
       "settings": {
+        "sticky_atc_discount_banner": "Up to 40% Off Applied",
         "gallery_type": "thumbs_aside",
         "desktop_alignment": "right",
         "mobile_alignment": "before",
