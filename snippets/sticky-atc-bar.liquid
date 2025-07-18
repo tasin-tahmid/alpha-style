@@ -155,16 +155,19 @@
             addToCartList[0].click();
         }
         
-        setTimeout(() => {
-            const mainAtcError = document.querySelector('.product-form__error-message-wrapper .product-form__error-message');
-            const stickyAtcError = document.querySelector('.c-sticky-atc-bar__error');
-            const stickyAtcErrorMessage = document.querySelector('.c-sticky-atc-bar__error .c-sticky-atc-bar__error-message');
+        const mainAtcError = document.querySelector('.product-form__error-message-wrapper .product-form__error-message');
+        const stickyAtcError = document.querySelector('.c-sticky-atc-bar__error');
+        const stickyAtcErrorMessage = document.querySelector('.c-sticky-atc-bar__error .c-sticky-atc-bar__error-message');
 
-            if(mainAtcError.innerText){
-                console.log("atc errors", mainAtcError.innerHTML);
-                stickyAtcErrorMessage.innerText = mainAtcError.innerText;
-                stickyAtcError.style.display = "flex";
-            }
+        if(mainAtcError.innerText){
+            console.log("atc errors", mainAtcError.innerHTML);
+            stickyAtcErrorMessage.innerText = mainAtcError.innerText;
+            stickyAtcError.style.display = "flex";
+        }else{
+            stickyAtcErrorMessage.innerText = "";
+            stickyAtcError.style.display = "none";
+        }
+        setTimeout(() => {
         }, 1000);
     }
 
