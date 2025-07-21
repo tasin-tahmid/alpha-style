@@ -787,10 +787,6 @@ main .shopify-section:first-child.not-margin .section--have-overlay:not(.article
   position: relative;
 }
 
-.product__description div:has(table) {
-  display: none;
-}
-
 .product__description br {
   display: none;
 }
