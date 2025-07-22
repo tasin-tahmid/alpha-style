@@ -787,6 +787,18 @@ main .shopify-section:first-child.not-margin .section--have-overlay:not(.article
   position: relative;
 }
 
+@media (max-width: 750px) {
+  .product__description div:has(table) {
+    overflow-x: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+    padding: 8px;
+  }
+  .product__description div:has(table)::--webkit-scrollbar {
+    display: none;
+  }
+}
+
 .product__description br {
   display: none;
 }
